@@ -1,63 +1,43 @@
 #include "main.h"
 /**
- * argstostr - concatenates all the arguments of your program
- * @ac: argument count
- * @av: argument vector
- * Return: char *
+ * argstostr - prints args
+ * @ac: takes in width of grid
+ * @av: height of grid
+ * Return: the args one line at a time
  */
+
 char *argstostr(int ac, char **av)
 {
-	char *d;
-
-	int i;
-
-	int l = 0;
-
-	char *m;
-
-	int j;
+	char *str;
+	int count = 0, a = 0, b = 0, c = 0;
 
 	if (ac == 0 || av == NULL)
 		return (NULL);
-	for (i = 0; i < ac; i++)
+	while (a < ac)
 	{
-		d = malloc(sizeof(char) * (_strlen(av[i]) - 1) + 2);
-	}
-	if (d == NULL)
-		return (NULL);
-	for (i = 0; i < ac; i++)
-	{
-		m = malloc(sizeof(char) * (_strlen(av[i] - 1)));
-		m = av[i];
-		for (j = 0; j < _strlen(m); j++)
+		b = 0;
+		while (av[a][b] != '\0')
 		{
-			d[l + j] = m[j];
+			count++;
+			b++;
 		}
-		d[l + j] = '\n';
-		l = l + j + 1;
+		a++;
 	}
-	return (d);
-}
-/**
- * _strlen - return the length of a string
- *
- * @s: pointer to string
- *
- * Return: int
- */
-int _strlen(char *s)
-{
-	int i = 1;
-
-	int result = 0;
-
-	char r = *s;
-
-	while
-		(r != '\0') {
-		result++;
-		r = *(s + i);
-		i++;
+	count = count + ac + 1;
+	str = malloc(sizeof(char) * count);
+	if (str == NULL)
+	{
+		return (NULL);
+	}
+	for (a = 0; a < ac; a++)
+	{
+		for (b = 0; av[a][b] != '\0'; b++)
+		{
+			str[c] = av[a][b];
+			c++;
 		}
-	return (result);
+		str[c] = '\n';
+		c++;
+	}
+	return (str);
 }
